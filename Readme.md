@@ -6,4 +6,4 @@
 
 ### Credits
 - [Fish Images](https://opengameart.org/content/fish-set)
--[CSS For speech bubbles](https://codepen.io/JoeHastings/pen/gPrPMo)
+- [CSS For speech bubbles](https://codepen.io/JoeHastings/pen/gPrPMo)
