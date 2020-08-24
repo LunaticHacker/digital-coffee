@@ -1,13 +1,14 @@
 let bubbles = [];
 let fishes = [];
-let guppy_right;
-let guppy_left;
+let guppy, guppy_json;
 let p;
 let index = null;
+let afinn;
 
 function preload() {
-  guppy_right = loadImage("guppy_right.png");
-  guppy_left = loadImage("guppy_left.png");
+  guppy = loadImage("images/merged_fish.png");
+  guppy_json = loadJSON("images/fish.json");
+  afinn = loadJSON("afinn.json");
 }
 
 async function setup() {
@@ -38,9 +39,11 @@ async function setup() {
     "text/html"
   );
   let items = doc.getElementsByTagName("li");
-  //fishes.push(doc)
-  //console.log(doc.getElementsByTagName("li"));
   for (let i = 0; i < items.length - 6; i++) {
+    let darray = items[i].textContent.split(/(\(d\.\s\d{4}\))/);
+    let barray = items[i].textContent.split(/(\(b\.\s\d{4}\))/);
+    if (darray.length > 1) items[i].textContent = darray[0] + "Died";
+    if (barray.length > 1) items[i].textContent = barray[0] + "was Born";
     fishes.push(new Fish(items[i].textContent));
   }
 }

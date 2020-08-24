@@ -1,0 +1,14 @@
+
+{
+    "normal":
+    {
+        "left":90,
+        "right":60
+    },
+
+    "sick":
+    {
+        "left":30,
+        "right":0
+    }
+}
