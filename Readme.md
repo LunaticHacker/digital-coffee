@@ -1,9 +1,9 @@
 # Digital Coffee
-**A Start Page for your browser**
----
-**Fill your screen with retrophiliac guppies**
 
+## **A Start Page for your browser**
+
+**Fill your screen with retrophiliac fishes**
 
 ### Credits
-- [Fish Images](https://opengameart.org/content/fish-set)
+
 - [CSS For speech bubbles](https://codepen.io/JoeHastings/pen/gPrPMo)
