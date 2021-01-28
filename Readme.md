@@ -2,7 +2,7 @@
 
 ## **A Start Page for your browser**
 
-**Fill your screen with retrophiliac fishes**
+**Showcasing Wikipedia On this day Api**
 
 ### Credits
 
