@@ -1,13 +1,9 @@
 let bubbles = [];
 let fishes = [];
-let guppy, guppy_json;
 let p;
 let index = null;
 let afinn;
-
 function preload() {
-  guppy = loadImage("images/merged_fish.png");
-  guppy_json = loadJSON("images/fish.json");
   afinn = loadJSON("afinn.json");
 }
 

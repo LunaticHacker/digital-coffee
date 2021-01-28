@@ -4,25 +4,26 @@ class Fish {
     this.y = random(height);
     this.text = "On this day " + text;
     this.velocity = p5.Vector.random2D();
-    this.dir = this.velocity.x > 0 ? "right" : "left";
-    this.state = analysis(this.text) >= 0 ? "normal" : "sick";
+    this.dir = this.velocity.x > 0 ? 1 : -1;
+    this.state = analysis(this.text) >= 0 ? color(255, 0, 0) : color(0, 0, 0);
     this.r = 15;
   }
 
   show() {
-    fill(255);
-    imageMode(CENTER);
-    image(
-      guppy,
-      this.x,
-      this.y,
-      this.r * 2,
-      this.r * 2,
-      guppy_json[this.state][this.dir],
-      0,
-      this.r * 2,
-      this.r * 2
-    );
+    stroke(this.state);
+    fill(this.state);
+    push();
+    translate(this.x, this.y);
+    beginShape();
+    for (let i = 0; i <= 30; i += 0.1) {
+      //Fish Curve -> https://mathworld.wolfram.com/FishCurve.html
+      curveVertex(
+        this.dir * (this.r * cos(i) - this.r * Math.pow(sin(i), 2)),
+        this.r * cos(i) * sin(i)
+      );
+    }
+    endShape();
+    pop();
   }
   update() {
     if (this.x < 0 || this.x > width) {
@@ -38,7 +39,7 @@ class Fish {
     if (random() < 0.01) {
       this.velocity = p5.Vector.random2D();
     }
-    this.dir = this.velocity.x > 0 ? "right" : "left";
+    this.dir = this.velocity.x > 0 ? 1 : -1;
   }
 
   intersects(x, y) {
