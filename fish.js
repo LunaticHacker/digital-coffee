@@ -5,17 +5,19 @@ class Fish {
     this.text = "On this day " + text;
     this.velocity = p5.Vector.random2D();
     this.dir = this.velocity.x > 0 ? 1 : -1;
-    this.state = analysis(this.text) >= 0 ? color(255, 0, 0) : color(0, 0, 0);
-    this.r = 15;
+    this.state = analysis(this.text) >= 0 ? "p" : "s";
+    this.r = 50;
   }
 
   show() {
-    stroke(this.state);
-    fill(this.state);
+    noStroke();
+    //fill(this.state);
+
     push();
     translate(this.x, this.y);
+    grdFill(0, 0, this.r, 0, this.state);
     beginShape();
-    for (let i = 0; i <= 30; i += 0.1) {
+    for (let i = 0; i <= this.r; i += 0.1) {
       //Fish Curve -> https://mathworld.wolfram.com/FishCurve.html
       curveVertex(
         this.dir * (this.r * cos(i) - this.r * Math.pow(sin(i), 2)),

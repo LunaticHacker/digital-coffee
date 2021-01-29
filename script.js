@@ -3,23 +3,20 @@ let fishes = [];
 let p;
 let index = null;
 let afinn;
+let canvas;
+let isg = false;
 function preload() {
   afinn = loadJSON("afinn.json");
 }
 
 async function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
+  canvas = createCanvas(window.innerWidth, window.innerHeight);
   p = createP("On this day");
   p.position(width / 2, height / 2);
   p.addClass("thought");
   p.addClass("bubble");
   p.id("p");
   p.hide();
-  for (let i = 0; i < 100; i++) {
-    bubbles.push(
-      new Bubble(random(width), random(height, height * 2), random(10))
-    );
-  }
   let response = await fetch(
     "https://en.wikipedia.org/w/api.php?action=featuredfeed&feed=onthisday&origin=*"
   );
@@ -46,10 +43,6 @@ async function setup() {
 
 function draw() {
   background(0, 255, 255);
-  for (bubble of bubbles) {
-    bubble.show();
-    bubble.update();
-  }
   for (let fish of fishes) {
     fish.show();
     fish.update();
@@ -59,7 +52,6 @@ function draw() {
         fish.y - document.getElementById("p").clientHeight - 80
       );
   }
-  fill(255, 0, 0);
 }
 function mousePressed() {
   for (let fish of fishes) {
@@ -70,4 +62,36 @@ function mousePressed() {
       break;
     }
   }
+}
+function grdFill(x1, y1, x2, y2, state) {
+  //I have no idea how this works the line was supposed to be used as a debug tool, now it won't work without it :)
+  let ctx = canvas.canvas.getContext("2d");
+  let grd = ctx.createLinearGradient(x1, y1, x2, y2);
+  strokeWeight(0);
+  stroke(0);
+  line(x1, y1, x2, y2);
+  switch (state) {
+    case "p":
+      grd.addColorStop(1, "violet");
+      grd.addColorStop(0.9, "indigo");
+      grd.addColorStop(0.7, "blue");
+      grd.addColorStop(0.5, "green");
+      grd.addColorStop(0.4, "yellow");
+      grd.addColorStop(0.2, "orange");
+      grd.addColorStop(0, "red");
+
+      break;
+    case "s":
+      grd.addColorStop(0, "violet");
+      grd.addColorStop(0.2, "indigo");
+      grd.addColorStop(0.4, "blue");
+      grd.addColorStop(0.5, "green");
+      grd.addColorStop(0.7, "yellow");
+      grd.addColorStop(0.9, "orange");
+      grd.addColorStop(1, "red");
+      break;
+  }
+
+  ctx.fillStyle = grd;
+  ctx.fill();
 }
